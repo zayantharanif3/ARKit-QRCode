@@ -156,22 +156,30 @@
             </objects>
             <point key="canvasLocation" x="-249" y="62"/>
         </scene>
-        <!--View Controller-->
+        <!--View Mode View Controller-->
         <scene sceneID="8x8-sW-Rtq">
             <objects>
-                <viewController id="S1q-9n-yEW" sceneMemberID="viewController">
+                <viewController id="S1q-9n-yEW" customClass="ViewModeViewController" customModule="ARKitImageDetection" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V1G-h9-eYw">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S4M-LT-nvI">
-                                <rect key="frame" x="54" y="358" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4M-LT-nvI" customClass="ARSCNView">
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             </sceneKitView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZMU-QX-mCw"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="S4M-LT-nvI" firstAttribute="leading" secondItem="V1G-h9-eYw" secondAttribute="leading" id="Fqu-8k-VVF"/>
+                            <constraint firstAttribute="trailing" secondItem="S4M-LT-nvI" secondAttribute="trailing" id="HAp-bK-Qug"/>
+                            <constraint firstItem="S4M-LT-nvI" firstAttribute="top" secondItem="V1G-h9-eYw" secondAttribute="top" id="YQT-CX-3On"/>
+                            <constraint firstAttribute="bottom" secondItem="S4M-LT-nvI" secondAttribute="bottom" id="gUd-wV-C3K"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="sceneView" destination="S4M-LT-nvI" id="7iE-pg-6rU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ae-Il-fDc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,7 +10,9 @@ import UIKit
 import ARKit
 import SceneKit
 
-class ViewModeViewController: UIViewController {
+class ViewModeViewController: UIViewController, ARSCNViewDelegate {
+    @IBOutlet weak var sceneView: ARSCNView!
+
     var barcodeDetector: BarcodeDetector = BarcodeDetector()
     var trackingQRCode = false
     var baseNode: SCNNode?
@@ -20,13 +22,25 @@ class ViewModeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        sceneView.delegate = self
-//        sceneView.session.delegate = self
-//        barcodeDetector.delegate = self
+        sceneView.delegate = self
+        sceneView.session.delegate = self
+        barcodeDetector.delegate = self
     }
     
-
-
+    /// Creates a new AR configuration to run on the `session`.
+    /// - Tag: ARReferenceImage-Loading
+    func resetTracking(withImages images: [ARReferenceImage] = []) {
+        trackingQRCode = !images.isEmpty
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.detectionImages = Set(images)
+        configuration.maximumNumberOfTrackedImages = 1
+        session.run(configuration)
+        statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
+        
+        updateQueue.asyncAfter(deadline: DispatchTime.now() + 5) {
+            self.trackingQRCode = false
+        }
+    }
 }
 
 extension ViewModeViewController: ARSessionDelegate {
